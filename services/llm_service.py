@@ -12,17 +12,12 @@ class ClientType(Enum):
     AZURE = "azure"
     GOOGLE = "google"
 
-openai_key = "df36ba9d648940aebb90be60b90a8410" #"df36ba9d648940aebb90be60b90a8410"
-openai_azure_endpoint="https://migration-gpt4westus.openai.azure.com/" # "https://migration-gpt4westus.openai.azure.com/"
-deployment_name="gpt-4-prod"#od"
-openai_api_version="2024-02-15-preview"
-
 class OpenAIService:
     def __init__(self):
-        self.openai_key = openai_key
-        self.openai_azure_endpoint = openai_azure_endpoint
-        self.azure_deployment_name = deployment_name
-        self.openai_api_version = openai_api_version
+        self.openai_key = os.getenv("OPENAI_KEY")
+        self.openai_azure_endpoint = os.getenv("OPENAI_AZURE_ENDPOINT")
+        self.azure_deployment_name = os.getenv("AZURE_DEPLOYMENT_NAME")
+        self.openai_api_version = os.getenv("OPENAI_API_VERSION")
         
         self.azure_client = self._initialize_azure_client()
         #self.google_client = self._initialize_google_client()
